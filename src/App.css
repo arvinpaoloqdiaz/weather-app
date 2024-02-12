@@ -162,6 +162,14 @@ hr{
   border-radius: 10px;
   scroll-snap-align:center;
   height: 100%;
+  transition: 0.33s;
+}
+.forecast-card:hover{
+  background: rgba(0, 0, 0, 0.2);
+}
+.forecast-card:active{
+  background: rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
 }
 .forecast-title{
   font-size: 1.2rem;
@@ -173,8 +181,31 @@ hr{
 .chances{
   text-align: center;
 }
-.contain{
-  
+
+.active__card{
+  background: rgba(0, 0, 0, 0.3);
+}
+.hourly__forecast__container{
+  display: flex;
+  overflow-x: scroll;
+  gap:2%;
+  -ms-overflow-style:none;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.hourly__forecast{
+  background: rgba(0,0,0,0.1);
+  min-width:12.5% !important;
+  scroll-snap-align:center;
+  border-radius: 1vw;
+  transition: 0.33s;
+}
+.hourly__forecast:hover{
+  background: rgba(0, 0, 0, 0.2);
+}
+.hourly__forecast:active{
+  background: rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
 }
 /*Screen size for medium screen*/
 @media (min-width:577px) and (max-width:991px){
@@ -196,6 +227,9 @@ hr{
   }
   .forecast-container{
     gap:2.5%;
+  }
+  .hourly__forecast{
+    min-width: 15% !important;
   }
 }
 /*Screen size 576px or less*/
@@ -219,6 +253,9 @@ hr{
   }
   .forecast-container{
     gap:4%;
+  }
+  .hourly__forecast{
+    min-width: 33% !important;
   }
   body{
     background: var(--main-background) !important;

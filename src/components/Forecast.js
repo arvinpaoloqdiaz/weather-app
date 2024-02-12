@@ -4,10 +4,13 @@ import sunrise from "../assets/images/sunrise.png";
 import sunset from "../assets/images/sunset.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSnowflake,faDroplet} from '@fortawesome/free-solid-svg-icons';
+import Hourly from "./Hourly";
 
 import "../App.css";
 export default function Forecast({data}){
 	const [forecastArray, setForecastArray] = useState([]);
+	const [currentDay, setCurrentDay] = useState(0);
+
 	function numToMonth(num){
 		switch(num){
 		case "01":
@@ -55,7 +58,7 @@ export default function Forecast({data}){
 
 			return (
 				
-				<Container key={day.date} className="forecast-card d-flex flex-column">
+				<Container key={day.date} className={(currentDay==index)?"active__card forecast-card d-flex flex-column":"forecast-card d-flex flex-column"} onClick={() => setCurrentDay(index)}>
 				<div className="text-center forecast-title">Day {index + 1}</div>
 				<div className="text-center">{forecastMonth} {forecastDate[2]}, {forecastDate[0]}</div>
 				<Row>
@@ -116,12 +119,28 @@ export default function Forecast({data}){
 			)
 		})
 		setForecastArray(forecast);
-	},[data])
+	},[data,currentDay])
 	return(
 		<>
 		<hr className="my-4"/>
-		<h3 className="text-center mb-2">10-day Forecast</h3>
+		<h3 className="text-center mb-2">3-day Forecast</h3>
 		<div className="forecast-container">{forecastArray}</div>
+		<hr className="my-4"/>
+		<h4 className="text-center">Day {currentDay + 1}</h4>
+		<h3 className="text-center mb-2"> Hourly Forecast</h3>
+		<Container className="hourly__forecast__container">
+		
+		{
+			data.forecast.forecastday[currentDay].hour.map(hour => {
+				return (
+					
+					<Hourly data={hour}/>
+					
+				)
+			})
+		}
+	
+		</Container>
 		</>
 	)
 }
